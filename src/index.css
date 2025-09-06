@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    scroll-behavior: smooth;
+}
+
+*::selection {
+    color: #fff;
+    background-color: #4dd969;
+}
+.text-main {
+    color: #4dd969;
+    transition: all 0.5s;
+    &:hover {
+        color: #3ea352;
+    }
+}
+.bg-main {
+    background-color: #34d15c;
+    transition: all 0.5s;
+    &:hover {
+        background-color: #2ca54a;
+    }
+}
+body {
+    font-family: "Inter", sans-serif;
+}
