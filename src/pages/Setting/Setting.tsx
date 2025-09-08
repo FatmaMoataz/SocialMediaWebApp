@@ -3,8 +3,10 @@ import BodySetting from '../../components/BodySetting/BodySetting'
 import BottomSetting from '../../components/BottomSetting/BottomSetting'
 import { motion } from "framer-motion"
 
+
 export default function Setting() {
   return (
+    <>
     <motion.div
             initial={{ opacity: 0 }}     
         animate={{ opacity: 1}}     
@@ -16,5 +18,6 @@ export default function Setting() {
     <div className="flex-grow border-t border-gray-300 my-3"></div>
     <BottomSetting/>
     </motion.div>
+    </>
   )
 }

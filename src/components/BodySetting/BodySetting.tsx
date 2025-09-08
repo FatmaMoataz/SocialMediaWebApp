@@ -1,8 +1,19 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
 
+type Info = {
+    num:string,
+    title:string
+}
+
+type Setting = {
+    title: string,
+    subtitle: string,
+    notification?:number
+}
+
 export default function BodySetting() {
 
-const infos = [
+const infos: Info[] = [
     {
     num: '572',
     title: 'Post',
@@ -17,31 +28,28 @@ const infos = [
 },
 ]
 
-const settings = [
+const settings: Setting[] = [
     {
         title:'Notification',
         subtitle:'See your recent activity',
-        notification:'35'
+        notification:35
     },
         {
         title:'Friends',
         subtitle:'Friendlist totals',
-        notification:''
     },
             {
         title:'Messages',
         subtitle:'Message your friends',
-        notification:'2'
+        notification:2
     },
                 {
         title:'Albums',
         subtitle:'Save or post your albums',
-        notification:''
     },
      {
         title:'Favorites',
         subtitle:'Friends you love',
-        notification:''
     },
 ]
   return (
