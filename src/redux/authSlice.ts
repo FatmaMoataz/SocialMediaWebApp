@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import type { LoginForm } from "../validation/loginSchema"
+import type { SignupForm } from "../validation/signupSchema"
 
 type AuthResponse = {
     token: string,
@@ -29,6 +30,31 @@ try {
             method:"GET",
             headers:{accept:"application/json"}
         })
+        if(!res.ok) {
+
+            return rejectWithValue("Invalid credentials");
+        }
+
+        const result:AuthResponse = await res.json()
+        localStorage.setItem("token", result.token)
+        return result
+} catch (error: any) {
+    return rejectWithValue(error.message || "Something went wrong");
+}
+    }
+)
+
+export const signup = createAsyncThunk(
+    "auth/signup", async(data: SignupForm, {rejectWithValue}) => {
+try {
+    const res = await fetch(`http://localhost:8000/sign-up`,{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json",
+                accept:"application/json"},
+            body: JSON.stringify(data),
+        })
+        
         if(!res.ok) {
 
             return rejectWithValue("Invalid credentials");

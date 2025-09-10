@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import type { AppDispatch } from "./redux/store"
 import { useEffect } from "react"
 import { loadToken } from "./redux/authSlice"
+import Signup from "./pages/Signup/Signup"
 
 function App() {
 
@@ -20,7 +21,9 @@ useEffect(() => {
 <Routes>
   <Route path="/" element={<Layout />}></Route>
   <Route index element={<Login />} />
+  <Route path="/login" element={<Login />} />
   <Route path="/setting" element={<Setting />} />
+  <Route path="/signup" element={<Signup />} />
 </Routes>
 </BrowserRouter>
   )
