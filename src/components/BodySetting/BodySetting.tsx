@@ -19,12 +19,11 @@ type Setting = {
 }
 
 interface BodySettingProps {
-  userId: number;
+  userId?: number;
 }
 
-export default function BodySetting({ userId}: BodySettingProps) {
+export default function BodySetting({ userId }: BodySettingProps) {
   const dispatch = useDispatch<AppDispatch>();
-
   const navigate = useNavigate()
 
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
@@ -32,11 +31,31 @@ export default function BodySetting({ userId}: BodySettingProps) {
   const { following, loading: followingLoading, error: followingError } = useSelector((state: RootState) => state.following);
 
   useEffect(() => {
-    dispatch(fetchUserPosts(userId));
-    dispatch(fetchUserFollowers(userId));
-    dispatch(fetchUserFollowing(userId));
+    if (userId) {
+      dispatch(fetchUserPosts(userId));
+      dispatch(fetchUserFollowers(userId));
+      dispatch(fetchUserFollowing(userId));
+    }
   }, [dispatch, userId]);
 
+  // Show loading state if userId is not available yet
+  if (!userId) {
+    return (
+      <div className="mx-8">
+        <div className="flex justify-around my-3">
+          {[1, 2, 3].map((item) => (
+            <div
+              key={item}
+              className="border-2 border-gray-300 px-5 py-3 rounded-xl text-center mt-6"
+            >
+              <div className="h-8 w-8 bg-gray-200 rounded animate-pulse mx-auto mb-2"></div>
+              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse mx-auto"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const infos: Info[] = [
     { num: postsLoading ? "..." : postsError ? 0 : posts.length, title: "Post" },
@@ -55,22 +74,21 @@ export default function BodySetting({ userId}: BodySettingProps) {
   return (
     <div className="mx-8">
       <div className="flex justify-around my-3">
-  {infos.map((info, index) => (
-    <div
-      key={index}
-      className="border-2 border-gray-300 px-5 py-3 rounded-xl text-center mt-6 cursor-pointer hover:bg-gray-100"
-      onClick={() => {
-        if (info.title === "Post") navigate(`/posts/${userId}`);
-        else if (info.title === "Followers") navigate(`/followers/${userId}`);
-        else if (info.title === "Following") navigate(`/following/${userId}`);
-      }}
-    >
-      <h1 className="text-3xl">{info.num}</h1>
-      <p className="text-gray-400">{info.title}</p>
-    </div>
-  ))}
-</div>
-
+        {infos.map((info, index) => (
+          <div
+            key={index}
+            className="border-2 border-gray-300 px-5 py-3 rounded-xl text-center mt-6 cursor-pointer hover:bg-gray-100"
+            onClick={() => {
+              if (info.title === "Post") navigate(`/posts/${userId}`);
+              else if (info.title === "Followers") navigate(`/followers/${userId}`);
+              else if (info.title === "Following") navigate(`/following/${userId}`);
+            }}
+          >
+            <h1 className="text-3xl">{info.num}</h1>
+            <p className="text-gray-400">{info.title}</p>
+          </div>
+        ))}
+      </div>
 
       <div>
         {settings.map((setting, index) => (

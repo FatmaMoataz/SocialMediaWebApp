@@ -128,9 +128,9 @@ export default function Login() {
             </form>
 
             <div className="flex items-center my-5">
-              <div className="flex-grow border-t border-gray-300"></div>
+              <div className="flex-grow border-t border-gray-200"></div>
               <span className="mx-4 text-gray-500">Or with</span>
-              <div className="flex-grow border-t border-gray-300"></div>
+              <div className="flex-grow border-t border-gray-200"></div>
             </div>
 
             <motion.button

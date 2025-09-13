@@ -47,6 +47,7 @@ export const login = createAsyncThunk(
 
       localStorage.setItem("token", payload.token);
       localStorage.setItem("userId", userId.toString()); 
+      localStorage.setItem("userEmail", data.email); 
 
       return payload;
     } catch (error: any) {
@@ -75,6 +76,7 @@ export const signup = createAsyncThunk(
             const result = await res.json();
             localStorage.setItem("token", result.token);
             localStorage.setItem("userId", result.user.id.toString()); 
+            localStorage.setItem("userEmail", result.user.email); 
             
             return result;
         } catch (error: any) {
@@ -92,11 +94,19 @@ const authSlice = createSlice({
             state.token = null
             localStorage.removeItem("token")
             localStorage.removeItem("userId")
+            localStorage.removeItem("userEmail")
         },
         loadToken: (state) => {
             const token = localStorage.getItem("token")
-            if(token) {
+            const userId = localStorage.getItem("userId") 
+            const userEmail = localStorage.getItem("userEmail") 
+            
+            if (token && userId) {
                 state.token = token
+                state.user = { 
+                    id: parseInt(userId), 
+                    email: userEmail || "" 
+                }
             }
         },
         clearError: (state) => {

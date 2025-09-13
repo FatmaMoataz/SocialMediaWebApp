@@ -22,7 +22,7 @@ export default function BottomSetting() {
           <h1 className="font-semibold text-lg">Privacy Policy</h1>
           <p className="text-gray-400 text-sm">Protect your privacy</p>
         </div>
-        <MdKeyboardArrowRight className="text-gray-400 border-2 rounded-full border-gray-300 p-1 text-3xl" />
+        <MdKeyboardArrowRight className="text-gray-400 border-2 rounded-full border-gray-200 p-1 text-3xl" />
       </div>
 
       {/* Logout Button */}

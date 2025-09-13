@@ -57,7 +57,7 @@ export default function AppSetting() {
       </div>
       <MdKeyboardArrowRight
         onClick={handleNavigate}
-        className="text-gray-400 cursor-pointer border-2 rounded-full border-gray-300 p-1 text-3xl"
+        className="text-gray-400 cursor-pointer border-2 rounded-full border-gray-200 p-1 text-3xl"
       />
     </div>
   );

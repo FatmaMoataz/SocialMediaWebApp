@@ -1,13 +1,11 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-export interface Followers {
-
-  id: number;
-
+export interface Follower {
+  follower_id: number;
 }
 
 interface FollowersState {
-  followers: Followers[];
+  followers: Follower[];
   loading: boolean;
   error: string | null;
 }
@@ -19,14 +17,14 @@ const initialState: FollowersState = {
 };
 
 export const fetchUserFollowers = createAsyncThunk(
-  'posts/fetchUserFollowers',
+  'followers/fetchUserFollowers',
   async (userId: number, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/get-user-followers?user_id=${userId}`);
+      const response = await fetch(`http://127.0.0.1:8000/get-followers?user_id=${userId}`);
       if (!response.ok) {
         throw new Error('Server error');
       }
-      const data: Followers[] = await response.json();
+      const data: Follower[] = await response.json();
       return data;
     } catch (error: any) {
       return rejectWithValue(error.message);
@@ -44,7 +42,7 @@ const followersSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUserFollowers.fulfilled, (state, action: PayloadAction<Followers[]>) => {
+      .addCase(fetchUserFollowers.fulfilled, (state, action: PayloadAction<Follower[]>) => {
         state.loading = false;
         state.followers = action.payload;
       })

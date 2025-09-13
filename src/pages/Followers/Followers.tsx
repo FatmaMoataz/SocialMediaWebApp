@@ -11,7 +11,7 @@ export default function Followers() {
         transition={{ duration: 0.9 }}
     >
         <AppFollowers/>
-          <div className="flex-grow border-t border-gray-300 my-3"></div>
+          <div className="flex-grow border-t border-gray-200 my-3"></div>
 <BodyFollowers />
     </motion.div>
   )

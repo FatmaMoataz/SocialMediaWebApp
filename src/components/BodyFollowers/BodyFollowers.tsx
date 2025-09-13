@@ -1,54 +1,61 @@
-// import Loader from "../Loader/Loader";
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import type { RootState, AppDispatch } from "../../redux/store";
-// import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { FollowerItem } from "../FollowerItem/FollowerItem";
 
 
 export default function BodyFollowers() {
-  //   const dispatch = useDispatch<AppDispatch>();
-  // const {
-  //   data: user,
-  //   loading,
-  //   error,
-  // } = useSelector((state: RootState) => state.user);
-  // const navigate = useNavigate();
+  const [followers, setFollowers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFollowers = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://127.0.0.1:8000/get-followers?user_id=1');
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch followers');
+        }
+        
+        const data = await response.json();
+        setFollowers(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFollowers();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-main"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 p-8">
+        Error: {error}
+      </div>
+    );
+  }
 
   return (
-    <>
-    <div className="mx-8 flex justify-between my-5">
-         <div className="flex items-center gap-2 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt="profile"
-                className="size-12 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5"
-              />
-              <div className="">
-                      <h1 className="font-semibold">{"Guest User"}</h1>
-                    <p className="text-gray-400">@{"No email"}</p>
-
-              </div>
-
-            </div>
-       <button className="text-white bg-main rounded-full px-5 cursor-pointer">Follow</button>
-      </div>
-  <div className="flex-grow border-t border-gray-100 my-3"></div>
-          <div className="mx-8 flex justify-between my-5">
-         <div className="flex items-center gap-2 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt="profile"
-                className="size-12 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5"
-              />
-              <div className="">
-                      <h1 className="font-semibold">{"Guest User"}</h1>
-                    <p className="text-gray-400">@{"No email"}</p>
-
-              </div>
-
-            </div>
-       <button className="border-2 border-gray-100 rounded-full px-5 cursor-pointer">Following</button>
-      </div>
-</>
-  )
+    <div>
+      {followers.length > 0 ? (
+        followers.map(follower => (
+          <FollowerItem key={follower.follower_id} follower={follower} />
+        ))
+      ) : (
+        <div className="text-center p-8 text-gray-500">
+          No followers found
+        </div>
+      )}
+    </div>
+  );
 }
