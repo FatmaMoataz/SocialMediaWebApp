@@ -5,7 +5,7 @@ const eduAPI = axios.create({
 });
 
 eduAPI.interceptors.request.use((config) => {
-  const token = localStorage.getItem("user_token_2");
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

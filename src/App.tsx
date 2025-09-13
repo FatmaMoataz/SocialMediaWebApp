@@ -1,13 +1,21 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import Login from "./pages/Login/Login";
-import Setting from "./pages/Setting/Setting";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import type { AppDispatch } from "./redux/store";
 import { useEffect } from "react";
+import type { AppDispatch } from "./redux/store";
 import { loadToken } from "./redux/slices/authSlice";
+
+import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+import Setting from "./pages/Setting/Setting";
 import Profile from "./pages/Profile/Profile";
+import Followers from "./pages/Followers/Followers";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
+
+// Redirect based on token for root "/"
+function RedirectHome() {
+  const token = localStorage.getItem("token");
+  return token ? <Navigate to="/setting" replace /> : <Navigate to="/login" replace />;
+}
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,12 +27,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}></Route>
-        <Route index element={<Login />} />
+        {/* Root redirects based on token */}
+        <Route path="/" element={<RedirectHome />} />
+
+        {/* Public routes */}
         <Route path="/login" element={<Login />} />
-        <Route path="/setting" element={<Setting />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
+
+        {/* Protected routes */}
+        <Route path="/setting" element={<ProtectedRoutes><Setting /></ProtectedRoutes>} />
+        <Route path="/profile" element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+        <Route path="/followers/:id" element={<ProtectedRoutes><Followers /></ProtectedRoutes>} />
       </Routes>
     </BrowserRouter>
   );

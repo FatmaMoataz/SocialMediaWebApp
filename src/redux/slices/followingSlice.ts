@@ -20,7 +20,7 @@ export const fetchUserFollowing = createAsyncThunk(
   'following/fetchUserFollowing',
   async (userId: number, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/get-user-following?user_id=${userId}`);
+      const response = await fetch(`http://127.0.0.1:8000/get-followings?user_id=${userId}`);
       if (!response.ok) {
         throw new Error('Server error');
       }
