@@ -7,6 +7,7 @@ import type { AppDispatch } from "./redux/store"
 import { useEffect } from "react"
 import { loadToken } from "./redux/authSlice"
 import Signup from "./pages/Signup/Signup"
+import Profile from "./pages/Profile/Profile"
 
 function App() {
 
@@ -24,6 +25,7 @@ useEffect(() => {
   <Route path="/login" element={<Login />} />
   <Route path="/setting" element={<Setting />} />
   <Route path="/signup" element={<Signup />} />
+  <Route path="/profile" element={<Profile />} />
 </Routes>
 </BrowserRouter>
   )
