@@ -1,5 +1,5 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { logout } from "../../redux/authSlice";
+import { logout } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../redux/store";
 import { motion } from "framer-motion";
@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function BottomSetting() {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout())
-    navigate('/login')
-  }
+    dispatch(logout());
+    navigate("/login");
+  };
 
   return (
     <div className="mx-15">

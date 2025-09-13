@@ -3,7 +3,7 @@ import { FaGoogle, FaTwitter } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { login } from "../../redux/authSlice";
+import { login } from "../../redux/slices/authSlice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginForm } from "../../validation/loginSchema";
@@ -13,7 +13,9 @@ import { toast } from "react-toastify";
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error, user } = useSelector((state: RootState) => state.auth);
+  const { loading, error, user } = useSelector(
+    (state: RootState) => state.auth
+  );
   const navigate = useNavigate();
 
   const {

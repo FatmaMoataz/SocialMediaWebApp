@@ -9,11 +9,13 @@ import Loader from "../../components/Loader/Loader";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { signupSchema, type SignupForm } from "../../validation/signupSchema";
-import { signup } from "../../redux/authSlice";
+import { signup } from "../../redux/slices/authSlice";
 
 export default function Signup() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error, user } = useSelector((state: RootState) => state.auth);
+  const { loading, error, user } = useSelector(
+    (state: RootState) => state.auth
+  );
   const navigate = useNavigate();
 
   const {
@@ -65,8 +67,7 @@ export default function Signup() {
         ) : (
           <>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
-  <div>
+              <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-900"

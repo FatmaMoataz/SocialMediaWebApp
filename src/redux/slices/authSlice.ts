@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import type { LoginForm } from "../validation/loginSchema"
-import type { SignupForm } from "../validation/signupSchema"
+import type { LoginForm } from "../../validation/loginSchema"
+import type { SignupForm } from "../../validation/signupSchema"
 
 type AuthResponse = {
     token: string,

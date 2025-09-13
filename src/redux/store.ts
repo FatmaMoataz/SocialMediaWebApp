@@ -1,11 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from './authSlice'
-import userReducer from "./userSlice";
+import authReducer from './slices/authSlice'
+import userReducer from "./slices/userSlice";
+import postsReducer from './slices/postsSlice'
+import followersReducer from './slices/followersSlice'
+import followingReducer from './slices/followingSlice'
 
 export const store = configureStore ({
     reducer:{
         auth: authReducer,
         user: userReducer,
+        posts: postsReducer,
+        followers: followersReducer,
+        following: followingReducer
     }
 })
 
