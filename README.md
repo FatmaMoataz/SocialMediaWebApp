@@ -5,3 +5,5 @@
 ![Settings](https://github.com/user-attachments/assets/cfe8daa8-2380-4b03-badf-8896cc0e79b3)
 
 ![Profile](https://github.com/user-attachments/assets/9bee0804-4046-4d3f-8107-c9822019ff73)
+
+![Followers](https://github.com/user-attachments/assets/fc05da2a-aa66-4701-814b-51d0b3097786)
