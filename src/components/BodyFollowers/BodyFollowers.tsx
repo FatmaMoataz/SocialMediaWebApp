@@ -1,45 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import { fetchUserFollowers } from "../../redux/slices/followersSlice";
 import { FollowerItem } from "../FollowerItem/FollowerItem";
-
+import { useParams } from "react-router-dom";
 
 export default function BodyFollowers() {
-  const [followers, setFollowers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { followers, loading, error } = useSelector(
+    (state: RootState) => state.followers
+  );
+  const { userId } = useParams<{ userId: string }>();
 
   useEffect(() => {
-    const fetchFollowers = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('http://127.0.0.1:8000/get-followers?user_id=1');
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch followers');
-        }
-        
-        const data = await response.json();
-        setFollowers(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+    if (userId) {
+      const numericUserId = parseInt(userId, 10);
+      if (!isNaN(numericUserId)) {
+        dispatch(fetchUserFollowers(numericUserId) as any);
       }
-    };
-
-    fetchFollowers();
-  }, []);
+    }
+  }, [dispatch, userId]);
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-main"></div>
+      <div className="mx-8">
+        {[...Array(5)].map((_, index) => (
+          <div key={index} className="flex justify-between my-5">
+            <div className="flex items-center gap-2 overflow-hidden">
+              <div className="size-12 rounded-full bg-gray-200 animate-pulse"></div>
+              <div>
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="h-3 w-16 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            </div>
+            <div className="h-8 w-20 bg-gray-200 rounded-full animate-pulse"></div>
+          </div>
+        ))}
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-center text-red-500 p-8">
+      <div className="mx-8 text-center text-red-500">
         Error: {error}
       </div>
     );
@@ -47,14 +50,14 @@ export default function BodyFollowers() {
 
   return (
     <div>
-      {followers.length > 0 ? (
-        followers.map(follower => (
+      {followers.length === 0 ? (
+        <div className="mx-8 text-center text-gray-500">
+          You don’t have any followers yet.
+        </div>
+      ) : (
+        followers.map((follower) => (
           <FollowerItem key={follower.follower_id} follower={follower} />
         ))
-      ) : (
-        <div className="text-center p-8 text-gray-500">
-          No followers found
-        </div>
       )}
     </div>
   );
