@@ -1,4 +1,4 @@
-import { MdKeyboardArrowLeft, MdFavorite, MdSearch  } from "react-icons/md";
+import { MdKeyboardArrowLeft, MdEdit  } from "react-icons/md";
 
 export default function AppProfile() {
   return (
@@ -8,8 +8,7 @@ export default function AppProfile() {
             />
             <h1 className="text-3xl">Profile</h1>
               <div className="flex gap-4">
-        <MdFavorite className="text-red-600 cursor-pointer text-3xl" />
-        <MdSearch className="text-gray-700 cursor-pointer text-3xl" />
+            <MdEdit className="text-gray-700 cursor-pointer text-3xl"/>
       </div>
     </div> 
   )

@@ -1,9 +1,13 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface Post {
-
   id: number;
-
+  user_id: number;
+  text: string;
+  likes_count: number;
+  comments_count: number;
+  shares_count: number;
+  created_at: string;
 }
 
 interface PostsState {
@@ -48,9 +52,9 @@ const postsSlice = createSlice({
         state.loading = false;
         state.posts = action.payload;
       })
-      .addCase(fetchUserPosts.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(fetchUserPosts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   },
 });

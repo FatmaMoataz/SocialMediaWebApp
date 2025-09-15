@@ -6,6 +6,7 @@ import { fetchUserPosts } from "../../redux/slices/postsSlice";
 import { fetchUserFollowers } from "../../redux/slices/followersSlice";
 import { fetchUserFollowing } from "../../redux/slices/followingSlice";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 type Info = {
   num: string | number,
@@ -41,19 +42,7 @@ export default function BodySetting({ userId }: BodySettingProps) {
   // Show loading state if userId is not available yet
   if (!userId) {
     return (
-      <div className="mx-8">
-        <div className="flex justify-around my-3">
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              className="border-2 border-gray-300 px-5 py-3 rounded-xl text-center mt-6"
-            >
-              <div className="h-8 w-8 bg-gray-200 rounded animate-pulse mx-auto mb-2"></div>
-              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse mx-auto"></div>
-            </div>
-          ))}
-        </div>
-      </div>
+<Loader/>
     );
   }
 
