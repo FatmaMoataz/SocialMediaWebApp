@@ -21,7 +21,7 @@ export default function BodyProfile({ userId }: BodyProfileProps) {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  // Local state to handle userId from props or localStorage
+  // Local state to handle userId from localStorage
   const [id, setId] = useState<number | null>(userId ?? null);
 
   const {

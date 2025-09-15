@@ -37,7 +37,7 @@ export default function BottomProfile() {
       }
     } catch (err) {
       console.error(err);
-      toast.error("❌ Failed to delete post");
+      toast.error("Failed to delete post");
     } finally {
       setIsDeleting(false);
     }
@@ -82,7 +82,7 @@ export default function BottomProfile() {
                   </span>
                   <button
                     onClick={() => setSelectedPost(post.id)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-700 cursor-pointer"
                   >
                     <MdDelete size={18} />
                   </button>

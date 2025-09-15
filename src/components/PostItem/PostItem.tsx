@@ -11,13 +11,13 @@ export default function PostItem({ post, onDelete }) {
     try {
       setIsDeleting(true);
       const res = await axios.delete(`http://127.0.0.1:8000/delete-post?post_id=${post.id}`);
-      toast.success("✅ Post deleted successfully");
+      toast.success("Post deleted successfully");
       setShowModal(false);
   
       if (onDelete) onDelete(post.id);
     } catch (error) {
       console.error(error);
-      toast.error("❌ Failed to delete post");
+      toast.error("Failed to delete post");
     } finally {
       setIsDeleting(false);
     }
