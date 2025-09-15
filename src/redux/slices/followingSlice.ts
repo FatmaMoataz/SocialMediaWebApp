@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface Following {
-  id: number;
+  following_id: number;
 }
 
 interface FollowingState {

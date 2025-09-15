@@ -10,6 +10,7 @@ import Setting from "./pages/Setting/Setting";
 import Profile from "./pages/Profile/Profile";
 import Followers from "./pages/Followers/Followers";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
+import Following from "./pages/Following/Following";
 
 // Redirect based on token for root "/"
 function RedirectHome() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/setting" element={<ProtectedRoutes><Setting /></ProtectedRoutes>} />
         <Route path="/profile" element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
         <Route path="/followers/:id" element={<ProtectedRoutes><Followers /></ProtectedRoutes>} />
+        <Route path="/following/:id" element={<ProtectedRoutes><Following /></ProtectedRoutes>} />
       </Routes>
     </BrowserRouter>
   );
