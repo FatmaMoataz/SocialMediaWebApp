@@ -9,3 +9,5 @@
 ![Followers](https://github.com/user-attachments/assets/fc05da2a-aa66-4701-814b-51d0b3097786)
 
 ![Following](https://github.com/user-attachments/assets/33f77397-4429-4ed0-9676-e2827730a7ea)
+
+![Posts](https://github.com/user-attachments/assets/6bcfdd44-e1ae-4050-bc34-4afc8f3cc7fe)
