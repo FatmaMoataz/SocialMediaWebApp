@@ -4,12 +4,14 @@ import userReducer from "./slices/userSlice";
 import postsReducer from './slices/postsSlice'
 import followersReducer from './slices/followersSlice'
 import followingReducer from './slices/followingSlice'
+import followReducer from './slices/followSlice'
 
 export const store = configureStore ({
     reducer:{
         auth: authReducer,
         user: userReducer,
         posts: postsReducer,
+        follow: followReducer,
         followers: followersReducer,
         following: followingReducer
     }

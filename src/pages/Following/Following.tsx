@@ -1,4 +1,4 @@
-import AppFollowing from '../../components/AppFollowing/AppFollowing'
+import AppFollowing from '../../components/AppBars/AppFollowing/AppFollowing'
 import BodyFollowing from '../../components/BodyFollowing/BodyFollowing'
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";

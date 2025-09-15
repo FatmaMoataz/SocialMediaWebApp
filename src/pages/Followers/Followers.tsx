@@ -1,4 +1,4 @@
-import AppFollowers from '../../components/AppFollowers/AppFollowers'
+import AppFollowers from '../../components/AppBars/AppFollowers/AppFollowers'
 import BodyFollowers from '../../components/BodyFollowers/BodyFollowers'
 import { motion } from "framer-motion";
 
