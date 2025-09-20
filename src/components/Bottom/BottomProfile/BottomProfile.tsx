@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../redux/store";
-import Loader from "../Loader/Loader";
+import type { RootState } from "../../../redux/store";
+import Loader from "../../Loader/Loader";
 import { MdThumbUp, MdComment, MdShare, MdDelete } from "react-icons/md";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { fetchUserPosts } from "../../redux/slices/postsSlice";
+import { fetchUserPosts } from "../../../redux/slices/postsSlice";
 
 export default function BottomProfile() {
   const { posts, loading, error } = useSelector(

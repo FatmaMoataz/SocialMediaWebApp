@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../../redux/store";
-import { getUserData } from "../../redux/slices/userSlice";
-import Loader from "../Loader/Loader";
+import type { RootState, AppDispatch } from "../../../redux/store";
+import { getUserData } from "../../../redux/slices/userSlice";
+import Loader from "../../Loader/Loader";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 

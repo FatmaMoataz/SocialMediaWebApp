@@ -1,4 +1,4 @@
-import BottomProfile from '../../components/BottomProfile/BottomProfile'
+import BottomProfile from "../../components/Bottom/BottomProfile/BottomProfile"
 
 export default function Posts() {
   return (

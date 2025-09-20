@@ -1,7 +1,7 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { logout } from "../../redux/slices/authSlice";
+import { logout } from "../../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../../redux/store";
+import type { AppDispatch } from "../../../redux/store";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 

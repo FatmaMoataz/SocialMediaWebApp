@@ -1,6 +1,6 @@
-import AppProfile from "../../components/AppProfile/AppProfile";
-import BodyProfile from "../../components/BodyProfile/BodyProfile";
-import BottomProfile from "../../components/BottomProfile/BottomProfile";
+import AppProfile from "../../components/AppBars/AppProfile/AppProfile";
+import BodyProfile from "../../components/Body/BodyProfile/BodyProfile";
+import BottomProfile from "../../components/Bottom/BottomProfile/BottomProfile";
 import { motion } from "framer-motion";
 
 export default function Profile() {

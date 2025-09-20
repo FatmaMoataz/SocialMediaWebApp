@@ -1,5 +1,5 @@
 import AppFollowers from '../../components/AppBars/AppFollowers/AppFollowers'
-import BodyFollowers from '../../components/BodyFollowers/BodyFollowers'
+import BodyFollowers from '../../components/Body/BodyFollowers/BodyFollowers';
 import { motion } from "framer-motion";
 
 export default function Followers() {

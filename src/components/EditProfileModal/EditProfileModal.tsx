@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../redux/store";
-import { getUserData } from "../redux/slices/userSlice";
+import type { RootState, AppDispatch } from "../../redux/store";
+import { updateUser } from "../../redux/slices/userSlice";
 
 interface EditProfileModalProps {
   onClose: () => void;
@@ -15,21 +15,26 @@ export default function EditProfileModal({ onClose }: EditProfileModalProps) {
   const [email, setEmail] = useState(user?.email || "");
   const [image, setImage] = useState(user?.image || "");
 
-  const handleUpdate = async () => {
-    try {
+  // const handleUpdate = async () => {
+  //   try {
 
-      console.log("Updating:", { name, email, image });
+  //     console.log("Updating:", { name, email, image });
 
-      const userId = localStorage.getItem("userId");
-      if (userId) {
-        dispatch(getUserData(Number(userId)));
-      }
+  //     const userId = localStorage.getItem("userId");
+  //     if (userId) {
+  //       dispatch(getUserData(Number(userId)));
+  //     }
 
-      onClose();
-    } catch (err) {
-      console.error("Error updating profile:", err);
-    }
-  };
+  //     onClose();
+  //   } catch (err) {
+  //     console.error("Error updating profile:", err);
+  //   }
+  // };
+
+const handleUpdate = () => {
+  dispatch(updateUser({ name, email, image }));
+  onClose();
+};
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import AppSetting from "../../components/AppSetting/AppSetting";
-import BodySetting from "../../components/BodySetting/BodySetting";
-import BottomSetting from "../../components/BottomSetting/BottomSetting";
+import AppSetting from "../../components/AppBars/AppSetting/AppSetting";
+import BodySetting from "../../components/Body/BodySetting/BodySetting";
+import BottomSetting from "../../components/Bottom/BottomSetting/BottomSetting";
 import { motion } from "framer-motion";
 import type { RootState } from "../../redux/store";
 import { useEffect } from "react";

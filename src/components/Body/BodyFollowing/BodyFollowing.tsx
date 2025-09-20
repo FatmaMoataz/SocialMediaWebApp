@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import type{ RootState } from '../../redux/store';
-import { fetchUserFollowing } from '../../redux/slices/followingSlice';
-import { FollowingItem } from '../FollowingItem/FollowingItem';
+import type { RootState } from '../../../redux/store';
+import { fetchUserFollowing } from '../../../redux/slices/followingSlice';
+import { FollowingItem } from '../../Items/FollowingItem/FollowingItem';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

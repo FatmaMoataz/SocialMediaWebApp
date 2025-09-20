@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
-import { fetchUserFollowers } from "../../redux/slices/followersSlice";
-import { FollowerItem } from "../FollowerItem/FollowerItem";
+import type { RootState } from "../../../redux/store";
+import { fetchUserFollowers } from "../../../redux/slices/followersSlice";
+import { FollowerItem } from "../../Items/FollowerItem/FollowerItem";
 import { useParams } from "react-router-dom";
 
 export default function BodyFollowers() {

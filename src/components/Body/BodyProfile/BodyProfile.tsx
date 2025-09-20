@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../redux/store";
+import type { AppDispatch, RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
-import { getUserData } from "../../redux/slices/userSlice";
-import Loader from "../Loader/Loader";
+import { getUserData } from "../../../redux/slices/userSlice";
+import Loader from "../../Loader/Loader";
 import { useNavigate } from "react-router-dom";
-import { fetchUserPosts } from "../../redux/slices/postsSlice";
-import { fetchUserFollowers } from "../../redux/slices/followersSlice";
-import { fetchUserFollowing } from "../../redux/slices/followingSlice";
+import { fetchUserPosts } from "../../../redux/slices/postsSlice";
+import { fetchUserFollowers } from "../../../redux/slices/followersSlice";
+import { fetchUserFollowing } from "../../../redux/slices/followingSlice";
 
 type Info = {
   num: string | number;

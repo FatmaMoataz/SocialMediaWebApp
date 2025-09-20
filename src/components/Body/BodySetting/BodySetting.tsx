@@ -1,12 +1,12 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { type RootState, type AppDispatch } from "../../redux/store";
-import { fetchUserPosts } from "../../redux/slices/postsSlice";
-import { fetchUserFollowers } from "../../redux/slices/followersSlice";
-import { fetchUserFollowing } from "../../redux/slices/followingSlice";
+import type{ RootState, AppDispatch } from "../../../redux/store";
+import { fetchUserPosts } from "../../../redux/slices/postsSlice";
+import { fetchUserFollowers } from "../../../redux/slices/followersSlice";
+import { fetchUserFollowing } from "../../../redux/slices/followingSlice";
 import { useNavigate } from "react-router-dom";
-import Loader from "../Loader/Loader";
+import Loader from "../../Loader/Loader";
 
 type Info = {
   num: string | number,
