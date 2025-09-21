@@ -7,6 +7,7 @@ import { fetchUserFollowers } from "../../../redux/slices/followersSlice";
 import { fetchUserFollowing } from "../../../redux/slices/followingSlice";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../Loader/Loader";
+import { fetchNotifications } from "../../../redux/slices/notificationSlice";
 
 type Info = {
   num: string | number,
@@ -30,16 +31,21 @@ export default function BodySetting({ userId }: BodySettingProps) {
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
   const { followers, loading: followersLoading, error: followersError } = useSelector((state: RootState) => state.followers);
   const { following, loading: followingLoading, error: followingError } = useSelector((state: RootState) => state.following);
+const { data: notifications, loading: notificationsLoading, error: notificationsError } = useSelector(
+  (state: RootState) => state.notifications
+);
 
+
+  
   useEffect(() => {
     if (userId) {
       dispatch(fetchUserPosts(userId));
       dispatch(fetchUserFollowers(userId));
       dispatch(fetchUserFollowing(userId));
+      dispatch(fetchNotifications(userId));
     }
   }, [dispatch, userId]);
 
-  // Show loading state if userId is not available yet
   if (!userId) {
     return (
 <Loader/>
@@ -53,11 +59,19 @@ export default function BodySetting({ userId }: BodySettingProps) {
   ];
 
   const settings: Setting[] = [
-    { title: "Notification", subtitle: "See your recent activity", notification: 35 },
-    { title: "Friends", subtitle: "Friendlist totals" },
-    { title: "Messages", subtitle: "Message your friends", notification: 2 },
-    { title: "Albums", subtitle: "Save or post your albums" },
-    { title: "Favorites", subtitle: "Friends you love" },
+{ 
+    title: "Notification", 
+    subtitle: "See your recent activity", 
+    notification: notificationsLoading
+      ? 0
+      : notificationsError
+        ? 0
+        : notifications.length
+  },
+  { title: "Friends", subtitle: "Friendlist totals" },
+  { title: "Messages", subtitle: "Message your friends", notification: 2 },
+  { title: "Albums", subtitle: "Save or post your albums" },
+  { title: "Favorites", subtitle: "Friends you love" },
   ];
 
   return (
@@ -80,7 +94,7 @@ export default function BodySetting({ userId }: BodySettingProps) {
       </div>
 
       <div>
-        {settings.map((setting, index) => (
+        {/* {settings.map((setting, index) => (
           <div key={index} className="flex justify-between my-7 mx-11">
             <div className="title">
               <h1 className="font-semibold">{setting.title}</h1>
@@ -95,7 +109,33 @@ export default function BodySetting({ userId }: BodySettingProps) {
               <MdKeyboardArrowRight className="text-gray-400 border-2 rounded-full border-gray-300 p-1 text-3xl" />
             </div>
           </div>
-        ))}
+        ))} */}
+        <div>
+  {settings.map((setting, index) => (
+    <div key={index} className="flex justify-between my-7 mx-11">
+      <div className="title">
+        <h1 className="font-semibold">{setting.title}</h1>
+        <p className="text-gray-400">{setting.subtitle}</p>
+      </div>
+      <div className="flex items-center gap-4">
+        {setting.notification && setting.notification > 0 && (
+          <span className="bg-green-500 text-white rounded-full px-3 py-2">
+            {setting.notification}
+          </span>
+        )}
+        <MdKeyboardArrowRight
+          className="text-gray-400 border-2 rounded-full border-gray-300 p-1 text-3xl cursor-pointer hover:bg-gray-200"
+          onClick={() => {
+            if (setting.title === "Notification") {
+              navigate(`/notifications/${userId}`);
+            }
+          }}
+        />
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );

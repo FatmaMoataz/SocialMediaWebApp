@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import type { RootState } from "../store";
 
 interface FollowState {
   isProcessing: boolean;
@@ -18,7 +19,7 @@ export const followUser = createAsyncThunk(
     const res = await axios.post(
       `http://127.0.0.1:8000/follow?sender_id=${senderId}&receiver_id=${receiverId}`
     );
-    return res.data;
+    return { ...res.data, receiverId };
   }
 );
 
@@ -29,7 +30,7 @@ export const unfollowUser = createAsyncThunk(
     const res = await axios.post(
       `http://127.0.0.1:8000/unfollow?sender_id=${senderId}&receiver_id=${receiverId}`
     );
-    return res.data;
+    return { ...res.data, receiverId };
   }
 );
 
@@ -43,8 +44,13 @@ const followSlice = createSlice({
         state.isProcessing = true;
         state.error = null;
       })
-      .addCase(followUser.fulfilled, (state) => {
+      .addCase(followUser.fulfilled, (state, action) => {
         state.isProcessing = false;
+
+        const rootState = (state as any) as RootState;
+        rootState.following.following.push({
+          following_id: action.payload.receiverId,
+        });
       })
       .addCase(followUser.rejected, (state, action) => {
         state.isProcessing = false;
@@ -54,8 +60,13 @@ const followSlice = createSlice({
         state.isProcessing = true;
         state.error = null;
       })
-      .addCase(unfollowUser.fulfilled, (state) => {
+      .addCase(unfollowUser.fulfilled, (state, action) => {
         state.isProcessing = false;
+
+        const rootState = (state as any) as RootState;
+        rootState.following.following = rootState.following.following.filter(
+          (f) => f.following_id !== action.payload.receiverId
+        );
       })
       .addCase(unfollowUser.rejected, (state, action) => {
         state.isProcessing = false;

@@ -5,6 +5,7 @@ import postsReducer from './slices/postsSlice'
 import followersReducer from './slices/followersSlice'
 import followingReducer from './slices/followingSlice'
 import followReducer from './slices/followSlice'
+import notificationsReducer from "./slices/notificationSlice";
 
 export const store = configureStore ({
     reducer:{
@@ -13,7 +14,8 @@ export const store = configureStore ({
         posts: postsReducer,
         follow: followReducer,
         followers: followersReducer,
-        following: followingReducer
+        following: followingReducer,
+        notifications: notificationsReducer,
     }
 })
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface Following {
   following_id: number;
@@ -9,15 +9,11 @@ interface UserData {
   email: string;
 }
 
-interface FollowingItemProps {
-  following: Following;
-}
-
-export function FollowingItem({ following }: FollowingItemProps) {
+export function FollowingItem({ following }: { following: Following }) {
   const [isFollowing, setIsFollowing] = useState(true);
   const [userData, setUserData] = useState<UserData>({
     name: "Loading...",
-    email: "Loading..."
+    email: "Loading...",
   });
   const [loading, setLoading] = useState(true);
 
@@ -28,33 +24,32 @@ export function FollowingItem({ following }: FollowingItemProps) {
         const response = await fetch(
           `http://127.0.0.1:8000/get-user_data?user_id=${following.following_id}`
         );
-        
+
         if (response.ok) {
           const userDetailsArray = await response.json();
-          
           if (userDetailsArray && userDetailsArray.length > 0) {
             const userDetails = userDetailsArray[0];
             setUserData({
               name: userDetails.name || "User",
-              email: userDetails.email || "No email available"
+              email: userDetails.email || "No email available",
             });
           } else {
             setUserData({
               name: "User Not Found",
-              email: "No email available"
+              email: "No email available",
             });
           }
         } else {
           setUserData({
             name: "User Not Found",
-            email: "No email available"
+            email: "No email available",
           });
         }
       } catch (error) {
         console.error("Error fetching user details:", error);
         setUserData({
           name: "Error Loading",
-          email: "Error Loading"
+          email: "Error Loading",
         });
       } finally {
         setLoading(false);
@@ -93,14 +88,18 @@ export function FollowingItem({ following }: FollowingItemProps) {
           />
           <div>
             <h1 className="font-semibold">{userData.name}</h1>
-            <p className="text-gray-400">@{userData.email.split('@')[0]}</p>
+            <p className="text-gray-400">@{userData.email.split("@")[0]}</p>
           </div>
         </div>
-        <button 
-          className={`${isFollowing ? 'border-2 border-gray-100 text-gray-700' : 'text-white bg-main'} rounded-full px-5 py-1 cursor-pointer transition-colors`}
+        <button
+          className={`${
+            isFollowing
+              ? "border-2 border-gray-100 text-gray-700"
+              : "text-white bg-main"
+          } rounded-full px-5 py-1 cursor-pointer transition-colors`}
           onClick={() => setIsFollowing(!isFollowing)}
         >
-          {isFollowing ? 'Following' : 'Follow'}
+          {isFollowing ? "Following" : "Follow"}
         </button>
       </div>
       <div className="flex-grow border-t border-gray-100 my-3"></div>
