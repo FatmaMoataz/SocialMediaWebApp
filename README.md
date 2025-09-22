@@ -14,6 +14,6 @@
 
 ![Notifiations](https://github.com/user-attachments/assets/a460ff1b-0caa-42ab-8cd1-3698363f8bdf)
 
-![Chat]()
+![Chat](https://github.com/user-attachments/assets/a5ba19d6-4c01-4852-b931-247a49be0e57)
 
 [Demo]()
