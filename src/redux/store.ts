@@ -6,6 +6,7 @@ import followersReducer from './slices/followersSlice'
 import followingReducer from './slices/followingSlice'
 import followReducer from './slices/followSlice'
 import notificationsReducer from "./slices/notificationSlice";
+import chatReducer from "./slices/chatSlice";
 
 export const store = configureStore ({
     reducer:{
@@ -16,6 +17,7 @@ export const store = configureStore ({
         followers: followersReducer,
         following: followingReducer,
         notifications: notificationsReducer,
+        chat: chatReducer,
     }
 })
 

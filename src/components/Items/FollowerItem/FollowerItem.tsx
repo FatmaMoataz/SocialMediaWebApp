@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type{ RootState } from "../../../redux/store";
+import type { RootState } from "../../../redux/store";
 import { followUser, unfollowUser } from "../../../redux/slices/followSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Follower {
   follower_id: number;
@@ -14,6 +15,7 @@ interface UserData {
 
 export function FollowerItem({ follower }: { follower: Follower }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
   const { isProcessing } = useSelector((state: RootState) => state.follow);
 
   const [isFollowing, setIsFollowing] = useState(false);
@@ -82,6 +84,10 @@ export function FollowerItem({ follower }: { follower: Follower }) {
     }
   };
 
+  const goToChat = () => {
+    navigate(`/chat/${follower.follower_id}`); 
+  };
+
   if (loading) {
     return (
       <div className="mx-8 flex justify-between my-5">
@@ -99,7 +105,10 @@ export function FollowerItem({ follower }: { follower: Follower }) {
 
   return (
     <div className="mx-8 flex justify-between my-5">
-      <div className="flex items-center gap-2 overflow-hidden">
+      <div
+        className="flex items-center gap-2 overflow-hidden cursor-pointer"
+        onClick={goToChat}
+      >
         <img
           src={`https://i.pravatar.cc/150?u=${follower.follower_id}`}
           alt="profile"

@@ -13,6 +13,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import Following from "./pages/Following/Following";
 import Posts from "./pages/Posts/Posts";
 import Notifications from "./pages/Notifications/Notifications";
+import Chat from "./pages/Chat/Chat";
 
 // Redirect based on token for root "/"
 function RedirectHome() {
@@ -44,6 +45,8 @@ function App() {
         <Route path="/following/:id" element={<ProtectedRoutes><Following /></ProtectedRoutes>} />
         <Route path="/posts/:id" element={<ProtectedRoutes><Posts /></ProtectedRoutes>} />
         <Route path="/notifications/:id" element={<ProtectedRoutes><Notifications /></ProtectedRoutes>} />
+        <Route path="/chat/:id" element={<Chat />} />
+
       </Routes>
     </BrowserRouter>
   );

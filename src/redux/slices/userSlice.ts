@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import eduAPI from "../../api/eduAPI";
-import axios from "axios";
 
 const savedUserId = localStorage.getItem("userId");
 const savedUserName = localStorage.getItem("userName");

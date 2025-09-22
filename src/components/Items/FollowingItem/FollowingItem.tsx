@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Following {
   following_id: number;
@@ -16,6 +17,7 @@ export function FollowingItem({ following }: { following: Following }) {
     email: "Loading...",
   });
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -59,6 +61,10 @@ export function FollowingItem({ following }: { following: Following }) {
     fetchUserDetails();
   }, [following.following_id]);
 
+  const goToChat = () => {
+    navigate(`/chat/${following.following_id}`); 
+  };
+
   if (loading) {
     return (
       <>
@@ -80,7 +86,11 @@ export function FollowingItem({ following }: { following: Following }) {
   return (
     <>
       <div className="mx-8 flex justify-between my-5">
-        <div className="flex items-center gap-2 overflow-hidden">
+  
+        <div
+          className="flex items-center gap-2 overflow-hidden cursor-pointer"
+          onClick={goToChat}
+        >
           <img
             src={`https://i.pravatar.cc/150?u=${following.following_id}`}
             alt="profile"
