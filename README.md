@@ -12,4 +12,8 @@
 
 ![Posts](https://github.com/user-attachments/assets/6bcfdd44-e1ae-4050-bc34-4afc8f3cc7fe)
 
-[Demo](https://github.com/user-attachments/assets/16a1c694-4eb8-4dca-acb8-0aa770a64e02)
+![Notifiations](https://github.com/user-attachments/assets/a460ff1b-0caa-42ab-8cd1-3698363f8bdf)
+
+![Chat]()
+
+[Demo]()
