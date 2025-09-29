@@ -16,4 +16,4 @@
 
 ![Chat](https://github.com/user-attachments/assets/a5ba19d6-4c01-4852-b931-247a49be0e57)
 
-[Demo](https://github.com/user-attachments/assets/5a73dac8-8579-4f68-9ccf-e165ccea452d)
+![Timeline](https://github.com/user-attachments/assets/566ac029-9822-44a7-a18b-d5b70ccf338a)
