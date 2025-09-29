@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../redux/store";
-import type{ TimelinePost } from "../../redux/slices/timelineSlice";
+import type { TimelinePost } from "../../redux/slices/timelineSlice";
 import { fetchPostComments, addComment, clearComments } from "../../redux/slices/commentSlice";
 import Loader from "../../components/Loader/Loader";
 import { FiHeart, FiSend } from "react-icons/fi";
@@ -27,13 +27,11 @@ export default function PostDetails() {
       const foundPost = posts.find(p => p.id === parseInt(postId));
       if (foundPost) {
         setPost(foundPost);
-        // Fetch comments for this post
         dispatch(fetchPostComments(parseInt(postId)));
       }
       setLoading(false);
     }
 
-    // Cleanup: clear comments when leaving the page
     return () => {
       dispatch(clearComments());
     };
@@ -59,12 +57,10 @@ export default function PostDetails() {
   };
 
   const handleLikePost = () => {
-    // Implement like functionality here
     console.log('Like post:', postId);
   };
 
   const handleSharePost = () => {
-    // Implement share functionality here
     console.log('Share post:', postId);
   };
 
@@ -74,20 +70,31 @@ export default function PostDetails() {
   return (
     <div className="max-w-2xl mx-auto p-4">
       {/* Back Button */}
-           <MdKeyboardArrowLeft
-            onClick={() => navigate(-1)}
-              className="text-white cursor-pointer bg-main mb-5 border-2 rounded-sm p-1 text-4xl"
-            />
+      <MdKeyboardArrowLeft
+        onClick={() => navigate(-1)}
+        className="text-white cursor-pointer bg-main mb-5 border-2 rounded-sm p-1 text-4xl"
+      />
 
       {/* Post Content */}
       <div className="bg-white shadow-sm rounded-xl p-6 mb-6">
-        {/* User Info */}
+   
         <div className="flex items-center justify-between gap-2 mb-4">
-          <div>
-            <h1 className="font-semibold text-xl">{post.username}</h1>
-            <p className="text-gray-400 text-sm">
-              {new Date(post.created_at).toLocaleString()}
-            </p>
+          <div className="flex items-center gap-3">
+
+            <div className="flex-shrink-0">
+              <img
+                src={post.avatar_url || `https://i.pravatar.cc/150?u=${post.user_id}`}
+                alt={`${post.username}'s avatar`}
+                className="size-12 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5"
+              />
+            </div>
+            {/* User Info */}
+            <div>
+              <h1 className="font-semibold text-xl text-gray-900">{post.username}</h1>
+              <p className="text-gray-400 text-sm">
+                {new Date(post.created_at).toLocaleString()}
+              </p>
+            </div>
           </div>
           <button className="bg-main font-semibold text-white cursor-pointer rounded-3xl px-4 py-2 hover:bg-blue-600 transition-colors">
             Follow
@@ -95,7 +102,7 @@ export default function PostDetails() {
         </div>
 
         {/* Post Content */}
-        <p className="text-lg my-4 whitespace-pre-wrap">{post.text}</p>
+        <p className="text-lg my-4 whitespace-pre-wrap text-gray-800">{post.text}</p>
 
         {/* Stats */}
         <div className="flex items-center gap-6 text-gray-600 pt-4">
@@ -130,7 +137,7 @@ export default function PostDetails() {
         </div>
       </div>
 
-      {/* Add Comment Section */}
+
       {currentUser && (
         <div className="bg-white shadow-sm rounded-xl p-6 mb-6">
           <form onSubmit={handleAddComment} className="flex gap-3">

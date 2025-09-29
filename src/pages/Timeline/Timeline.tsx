@@ -28,6 +28,7 @@ export default function Timeline() {
           key={post.id}
           post_id={post.id}
           username={post.username}
+          avatar_url={post.avatar_url}
           createdAt={new Date(post.created_at).toLocaleString()}
           content={post.text}
           sharesCount={post.shares_count}
