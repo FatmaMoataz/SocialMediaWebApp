@@ -22,6 +22,20 @@ const initialState: CommentState = {
   error: null,
 };
 
+const fetchUserData = async (userId: number): Promise<{ name: string; email: string }> => {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/get-user_data?user_id=${userId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+    const userData = await response.json();
+    return userData[0] || { name: `User ${userId}`, email: '' };
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return { name: `User ${userId}`, email: '' };
+  }
+};
+
 export const fetchPostComments = createAsyncThunk(
   'comments/fetchPostComments',
   async (postId: number, { rejectWithValue }) => {
@@ -30,8 +44,23 @@ export const fetchPostComments = createAsyncThunk(
       if (!response.ok) {
         throw new Error('Failed to fetch comments');
       }
-      const data: Comment[] = await response.json();
-      return data;
+      const comments: Comment[] = await response.json();
+
+      const uniqueUserIds = [...new Set(comments.map(comment => comment.user_id))];
+      const userPromises = uniqueUserIds.map(userId => fetchUserData(userId));
+      const userResponses = await Promise.all(userPromises);
+      
+      const userMap: { [key: number]: string } = {};
+      uniqueUserIds.forEach((userId, index) => {
+        userMap[userId] = userResponses[index].name;
+      });
+
+      const commentsWithUsernames = comments.map(comment => ({
+        ...comment,
+        username: userMap[comment.user_id] || `User ${comment.user_id}`
+      }));
+
+      return commentsWithUsernames;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -40,23 +69,23 @@ export const fetchPostComments = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
   'comments/addComment',
-  async ({ postId, text, userId }: { postId: number; text: string; userId: number }, { rejectWithValue }) => {
+  async ({ postId, content, userId }: { postId: number; content: string; userId: number }, { rejectWithValue, dispatch }) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/create-comment', {
+      const response = await fetch(`http://127.0.0.1:8000/create-comment?post_id=${postId}&user_id=${userId}&content=${encodeURIComponent(content)}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'accept': 'application/json',
         },
-        body: JSON.stringify({
-          post_id: postId,
-          user_id: userId,
-          text: text,
-        }),
       });
+      
       if (!response.ok) {
         throw new Error('Failed to add comment');
       }
+      
       const data = await response.json();
+      
+      dispatch(fetchPostComments(postId));
+      
       return data;
     } catch (error: any) {
       return rejectWithValue(error.message);
@@ -74,7 +103,7 @@ const commentSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch comments
+ 
       .addCase(fetchPostComments.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -87,9 +116,18 @@ const commentSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
-      // Add comment
-      .addCase(addComment.fulfilled, (state, action) => {
-        state.comments.push(action.payload);
+   
+      .addCase(addComment.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addComment.fulfilled, (state) => {
+        state.loading = false;
+   
+      })
+      .addCase(addComment.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });

@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import eduAPI from "../../api/eduAPI";
 
-// Create Comment
 export const createComment = createAsyncThunk(
   "interactions/createComment",
   async ({ user_id, post_id, content }: { user_id: number; post_id: number; content: string }) => {
@@ -13,7 +12,6 @@ export const createComment = createAsyncThunk(
   }
 );
 
-// Like Post
 export const likePost = createAsyncThunk(
   "interactions/likePost",
   async ({ user_id, post_id }: { user_id: number; post_id: number }) => {
@@ -24,7 +22,6 @@ export const likePost = createAsyncThunk(
   }
 );
 
-// Unlike Post
 export const unlikePost = createAsyncThunk(
   "interactions/unlikePost",
   async ({ user_id, post_id }: { user_id: number; post_id: number }) => {
@@ -46,21 +43,21 @@ const interactionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Comment Created
+
       .addCase(createComment.fulfilled, (state, action) => {
         const { post_id, comment } = action.payload;
         if (!state.comments[post_id]) state.comments[post_id] = [];
         state.comments[post_id].push(comment);
       })
 
-      // Post Liked
+
       .addCase(likePost.fulfilled, (state, action) => {
         const { post_id } = action.payload;
         if (!state.likes[post_id]) state.likes[post_id] = 0;
         state.likes[post_id] += 1;
       })
 
-      // Post Unliked
+     
       .addCase(unlikePost.fulfilled, (state, action) => {
         const { post_id } = action.payload;
         if (state.likes[post_id]) state.likes[post_id] -= 1;

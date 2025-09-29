@@ -60,7 +60,6 @@ export const fetchTimelinePosts = createAsyncThunk(
       const postsWithUsernames = posts.map(post => ({
         ...post,
         username: userMap[post.user_id]?.name || `User ${post.user_id}`,
-        // Generate avatar URL using your pattern
         avatar_url: `https://i.pravatar.cc/150?u=${post.user_id}`
       }));
 

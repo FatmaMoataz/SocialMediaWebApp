@@ -45,7 +45,7 @@ export default function PostDetails() {
     try {
       await dispatch(addComment({
         postId: parseInt(postId),
-        text: newComment,
+        content: newComment,
         userId: currentUser.id
       })).unwrap();
       setNewComment("");
@@ -77,10 +77,8 @@ export default function PostDetails() {
 
       {/* Post Content */}
       <div className="bg-white shadow-sm rounded-xl p-6 mb-6">
-   
         <div className="flex items-center justify-between gap-2 mb-4">
           <div className="flex items-center gap-3">
-
             <div className="flex-shrink-0">
               <img
                 src={post.avatar_url || `https://i.pravatar.cc/150?u=${post.user_id}`}
@@ -137,7 +135,6 @@ export default function PostDetails() {
         </div>
       </div>
 
-
       {currentUser && (
         <div className="bg-white shadow-sm rounded-xl p-6 mb-6">
           <form onSubmit={handleAddComment} className="flex gap-3">
@@ -180,6 +177,7 @@ export default function PostDetails() {
               <div key={comment.id} className="border-b border-gray-100 pb-4 last:border-0">
                 <div className="flex justify-between items-start mb-2">
                   <div>
+      
                     <h3 className="font-semibold text-sm">{comment.username}</h3>
                     <p className="text-gray-400 text-xs">
                       {new Date(comment.created_at).toLocaleString()}
