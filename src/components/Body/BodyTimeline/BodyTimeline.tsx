@@ -1,5 +1,6 @@
 import { MdComment, MdShare } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 interface BodyTimelineProps {
   post_id: number;
@@ -22,15 +23,32 @@ export default function BodyTimeline({
   commentsCount,
   isFollowing = false,
 }: BodyTimelineProps) {
+  const navigate = useNavigate();
+
+  const handlePostClick = () => {
+    navigate(`/post/${post_id}`);
+  };
+
+  const handleActionClick = (e: React.MouseEvent, action: string) => {
+    e.stopPropagation();
+    console.log(`${action} clicked for post ${post_id}`);
+  };
+
   return (
-    <div className="m-11 shadow-sm p-4 rounded-xl">
+    <div 
+      className="m-11 shadow-sm p-4 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors"
+      onClick={handlePostClick}
+    >
       {/* User Info */}
       <div className="flex items-center justify-between gap-2">
         <div>
           <h1 className="font-semibold">{username}</h1>
           <p className="text-gray-400 text-sm">{createdAt}</p>
         </div>
-        <button className="bg-main font-semibold text-white cursor-pointer rounded-3xl px-3 py-2">
+        <button 
+          className="bg-main font-semibold text-white cursor-pointer rounded-3xl px-3 py-2 hover:bg-blue-600 transition-colors"
+          onClick={(e) => handleActionClick(e, 'follow')}
+        >
           {isFollowing ? "Following" : "Follow"}
         </button>
       </div>
@@ -40,14 +58,23 @@ export default function BodyTimeline({
 
       {/* Actions */}
       <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1">
+        <div 
+          className="flex items-center gap-1 cursor-pointer hover:text-blue-600"
+          onClick={(e) => handleActionClick(e, 'share')}
+        >
           <MdShare /> {sharesCount}
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
+          <div 
+            className="flex items-center gap-1 cursor-pointer hover:text-red-600"
+            onClick={(e) => handleActionClick(e, 'like')}
+          >
             <FiHeart /> {likesCount}
           </div>
-          <div className="flex items-center gap-1">
+          <div 
+            className="flex items-center gap-1 cursor-pointer hover:text-green-600"
+            onClick={(e) => handleActionClick(e, 'comment')}
+          >
             <MdComment /> {commentsCount}
           </div>
         </div>

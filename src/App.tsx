@@ -15,6 +15,7 @@ import Posts from "./pages/Posts/Posts";
 import Notifications from "./pages/Notifications/Notifications";
 import Chat from "./pages/Chat/Chat";
 import Timeline from "./pages/Timeline/Timeline";
+import PostDetails from "./pages/PostDetails/PostDetails";
 
 // Redirect based on token for root "/"
 function RedirectHome() {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/chat/:id" element={<Chat />} />
         <Route path="/timeline" element={<Timeline />} />
 
+        <Route path="/post/:postId" element={<PostDetails />} />
       </Routes>
     </BrowserRouter>
   );
