@@ -31,6 +31,9 @@ export default function BodyTimeline({
 
   const handleActionClick = (e: React.MouseEvent, action: string) => {
     e.stopPropagation();
+    if (action === 'comment') {
+      navigate(`/post/${post_id}#comments`);
+    }
     console.log(`${action} clicked for post ${post_id}`);
   };
 
@@ -47,28 +50,22 @@ export default function BodyTimeline({
         </div>
         <button 
           className="bg-main font-semibold text-white cursor-pointer rounded-3xl px-3 py-2 hover:bg-blue-600 transition-colors"
-          onClick={(e) => handleActionClick(e, 'follow')}
+          onClick={(e) => e.stopPropagation()}
         >
           {isFollowing ? "Following" : "Follow"}
         </button>
       </div>
 
       {/* Post Content */}
-      <p className="my-3">{content}</p>
+      <p className="my-3 whitespace-pre-wrap">{content}</p>
 
       {/* Actions */}
       <div className="flex items-center justify-between gap-2">
-        <div 
-          className="flex items-center gap-1 cursor-pointer hover:text-blue-600"
-          onClick={(e) => handleActionClick(e, 'share')}
-        >
+        <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
           <MdShare /> {sharesCount}
         </div>
         <div className="flex items-center gap-2">
-          <div 
-            className="flex items-center gap-1 cursor-pointer hover:text-red-600"
-            onClick={(e) => handleActionClick(e, 'like')}
-          >
+          <div className="flex items-center gap-1 cursor-pointer hover:text-red-600">
             <FiHeart /> {likesCount}
           </div>
           <div 

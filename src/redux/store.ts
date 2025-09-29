@@ -9,6 +9,7 @@ import notificationsReducer from "./slices/notificationSlice";
 import chatReducer from "./slices/chatSlice";
 import timelineReducer from "./slices/timelineSlice";
 import interactionReducer from "./slices/interactionSlice";
+import commentReducer from "./slices/commentSlice";
 
 export const store = configureStore ({
     reducer:{
@@ -22,6 +23,7 @@ export const store = configureStore ({
         chat: chatReducer,
         timeline: timelineReducer,
         interactions: interactionReducer,
+        comments: commentReducer
     }
 })
 
