@@ -8,8 +8,7 @@ export default function Notifications() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9 }}
         className="my-5">
-        <AppNotifications/>
-         <div className="flex-grow border-t border-gray-200 my-3"></div>
+        <div className='shadow-sm pb-5'><AppNotifications/></div>
         <BodyNotifications/>
     </motion.div>
   )

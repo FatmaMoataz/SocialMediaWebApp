@@ -11,10 +11,8 @@ export default function Profile() {
       transition={{ duration: 0.9 }}
       className="my-5"
     >
-      <AppProfile />
-      <div className="flex-grow border-t border-gray-200 my-3"></div>
-      <BodyProfile />
-      <div className="flex-grow border-t border-gray-200 my-3"></div>
+      <div className="pb-5 shadow-sm"><AppProfile /></div>
+      <div className="pb-5 shadow-sm"><BodyProfile /></div>
       <BottomProfile />
     </motion.div>
   );

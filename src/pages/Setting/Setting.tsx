@@ -25,8 +25,7 @@ export default function Setting() {
         transition={{ duration: 0.9 }}
         className="my-5"
       >
-        <AppSetting />
-        <div className="flex-grow border-t border-gray-200 my-3"></div>
+        <div className="pb-5 shadow-sm"><AppSetting /></div>
         {userId ? <BodySetting userId={userId} /> : <div>Loading user data...</div>}
         <div className="flex-grow border-t border-gray-200 my-3"></div>
         <BottomSetting />

@@ -10,9 +10,9 @@ export default function Followers() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9 }}
     >
-        <AppFollowers/>
-          <div className="flex-grow border-t border-gray-200 my-3"></div>
-<BodyFollowers />
+       <div className="shadow-sm pb-5"> <AppFollowers/></div>
+    
+<div className='m-11'><BodyFollowers /></div>
     </motion.div>
   )
 }

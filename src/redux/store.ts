@@ -7,6 +7,8 @@ import followingReducer from './slices/followingSlice'
 import followReducer from './slices/followSlice'
 import notificationsReducer from "./slices/notificationSlice";
 import chatReducer from "./slices/chatSlice";
+import timelineReducer from "./slices/timelineSlice";
+import interactionReducer from "./slices/interactionSlice";
 
 export const store = configureStore ({
     reducer:{
@@ -18,6 +20,8 @@ export const store = configureStore ({
         following: followingReducer,
         notifications: notificationsReducer,
         chat: chatReducer,
+        timeline: timelineReducer,
+        interactions: interactionReducer,
     }
 })
 

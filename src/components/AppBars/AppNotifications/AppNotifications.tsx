@@ -11,7 +11,7 @@ export default function AppNotifications() {
         />
         <MdSearch size={28}/>
     </div>
-    <h1 className='my-4 font-semibold'>Notifications</h1>
+    <h1 className='my-4 text-2xl font-semibold'>Notifications</h1>
     </div>
   )
 }

@@ -12,9 +12,8 @@ export default function Following() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9 }}
     >
-        <AppFollowing userId={userId} />
-        <div className="flex-grow border-t border-gray-200 my-3"></div>
-        <BodyFollowing />
+       <div className='shadow-sm pb-5'> <AppFollowing userId={userId} /></div>
+        <div className='m-11'><BodyFollowing /></div>
     </motion.div>
   )
 }

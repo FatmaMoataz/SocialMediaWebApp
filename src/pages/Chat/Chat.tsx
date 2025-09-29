@@ -19,7 +19,7 @@ export default function Chat() {
       className="flex flex-col h-screen"
     >
 
-      <div className='border-b-2 border-b-gray-50'><AppChat /></div>
+      <div className='shadow-sm'><AppChat /></div>
 
 
       <div className="flex-grow overflow-auto">
@@ -27,7 +27,7 @@ export default function Chat() {
       </div>
 
   
-      <div className='border-t-2 pt-3 border-t-gray-50'><BottomChat userId={userId} /></div>
+      <div className='pt-3 shadow-sm'><BottomChat userId={userId} /></div>
     </motion.div>
   )
 }
